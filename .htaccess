@@ -1,0 +1,11 @@
+RewriteEngine On
+
+# 1. Redirect .html URLs to clean URLs (e.g., /about.html → /about)
+RewriteCond %{THE_REQUEST} ^[A-Z]{3,}\s/([^\s]+)\.html\sHTTP/
+RewriteRule ^ /%1 [R=301,L]
+
+# 2. Internally rewrite clean URLs to .html files (e.g., /about → /about.html)
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME}.html -f
+RewriteRule ^([^/]+)$ $1.html [L]
